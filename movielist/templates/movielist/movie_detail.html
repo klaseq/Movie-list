@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> {{ movie.name }} <span class="glyphicon glyphicon-erase"></span></h1>
+<small> Director: {{ movie.director }} </small>
+<h3> Genre: {{movie.genre.genre_name}} </h3>
+New Tags: {% if movie.tags.all.0 %} {% for tag in movie.tags.all %} <div class="btn btn-primary">{{tag.tag_title}} </div>
+{% endfor %} {% else %} <span style="color: red;">This movi don't have tags</span> {% endif %}
+<hr>
+<form method="POST">
+    {% csrf_token %}
+
+    {% if user.is_admin %}<button name="edit">Edit movie</button><button name="delete">Delete movie</button>{% endif %}
+</form>
+{% endblock %}
